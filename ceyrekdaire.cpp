@@ -8,4 +8,5 @@ int main(int argc,char** argv){
     cin>>yaricap;
     alan=(3.14*pow(yaricap,2))/4;
     cout<<"Ceyrek dairenin alani: "<<alan<<endl;
+    return 0;
     }
