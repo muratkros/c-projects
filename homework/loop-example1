@@ -1,0 +1,84 @@
+#include <iostream>
+using namespace std;
+int main(int argc,char* argv[]){ 
+	int sayac1, sayac2, secim, n;
+ do {
+   	sayac1=0;
+   cout<<"Merhaba sisteme hos geldiniz lutfen 0,1 veya 2 yi tuslayiniz"<<endl;
+   cout<<"Cikmak icin 9'u tuslayiniz"<<endl;
+   cin>>secim;                                                                             
+   switch(secim){   
+       case 0:
+       		cout<<"Lutfen bir sayi giriniz"<<endl;
+       		cin>>n;
+            //Buradaki düsünce bosluk bırakarak yıldızları doldurmak olacak
+            //yine case 1 gibi n-1-sayac1 yapacaz daha sonra 1 3 5 gitsin diye 2*sayac1+1 yapacaz
+			while(sayac1!=n) {
+        	for(sayac2=0;sayac2<(n-1-sayac1);sayac2++) {
+            cout<< "   "; 
+       	 }                   
+       	 	for(sayac2=0;sayac2<(2*sayac1 + 1);sayac2++) {
+        	    cout<<" * ";
+       	 }                                   
+        	cout<<endl; 
+        	sayac1=sayac1+1;
+    	}
+           break;
+       case 1:
+           cout<<"Lutfen bir sayi giriniz."<<endl;
+           //Düsünce olarak buradaki sayacta bosluk bıraktırmam lazım yani t kadar boşluk bırakcaz ve sonra yıldızları yazdıracaz deniyelim.
+                cin>>n;
+                //Boşluk sayısını da her seferinde azaltmam lazım ki sola doğru kayarak yıldızları yazdırayım.
+                //ilk yıldızın soluna son satırdaki yıldızdan 1 eksik tane boşluk bıraktırmam lazım yoksa yıldızlar yapışıyor
+                //toplam satır sayısı - o anki yıldız sayısını boşluk sayısı gibi düşündürüp döngü aldım bu sefer.
+                //boşluk sayısı=n-1 (saymaya 0 dan başladığımız için n-1)(toplam satır sayısı)-sayac1(şu anki yıldız sayısı) dedim ve boşluk bıraktıran döngüyü yazdım.
+                while(sayac1!=n){
+                    for(sayac2 = 0; sayac2 < (n - 1 - sayac1); sayac2++){
+                        cout<<"  ";
+                    }
+                    for(sayac2=0;sayac2<=sayac1;sayac2++){
+                        cout<<"* ";
+                        
+                    }
+                    cout<<""<<endl;
+                    sayac1=sayac1+1;
+                }
+           break;
+       case 2:
+           cout<<"Lutfen bir sayi giriniz."<<endl;
+           cin>>n;
+           //Şimdi yıldızların bir noktaya kadar geldikten sonra simetrik bir şekilde gittiği bir formül düşüncem for içerisinde.
+           //n'inci sayıya kadar yıldızları yazdırıcam sonra n'inci sayıdan sonra yıldızları azaltarak yazdırıcam.
+           //if yapısı n'inci sayıya kadar yazdıran bir döngü ve n'inci sayıdan sonra yıldızlatarı azaltan döngü yazıcam
+           //if yapısı kullanırsam sadece 1 yarısı olur diğer yarısı olmaz o yüzden 2 tane while döngüsü lazım.
+           //Boşluk bırakmam lazım ki adam akıllı simetrik gözüksün o yüzden bosluk kısmını case 1 den aldım.1 3 5 artsın diye toplama kısmınıda case 0 dan aldım.
+            while(sayac1<n){
+                 for(sayac2 = 0; sayac2 < (n - 1 - sayac1); sayac2++){
+                        cout<<"   ";
+                    }
+                    for(sayac2=0;sayac2<(2*sayac1+1);sayac2++){
+                        cout<<" * ";
+                        
+                    }
+                    cout<<endl;
+                    sayac1=sayac1+1;
+                }
+                sayac1 = n - 2;
+                 //sayac1=n olduğu için azaltarak gidicem ve n-2 den başlıcam bir alt satıra geçmek istediğim için.
+                while(sayac1>=0){
+                 for(sayac2 = 0; sayac2 < (n - 1 - sayac1); sayac2++){
+                        cout <<"   ";
+                    }
+                    for(sayac2=0;sayac2<(2*sayac1+1);sayac2++){
+                        cout<<" * ";
+                        
+                    }
+                    cout<<endl;
+            
+                    sayac1=sayac1-1;
+                }
+                break;
+   }
+   } while (secim != 9);
+   return 0;
+}         
