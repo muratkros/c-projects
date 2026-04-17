@@ -1,0 +1,185 @@
+#include <iostream>
+#include <string>
+#include <random>
+#include <thread>
+using namespace std;
+
+void clear() {
+	cout << "\033[2J\033[H\033[?25l";
+}
+
+int main() {
+	string input;
+	string characters = "qT7@jQ0|zX4#mJ9<xZ1>nV8^rP2!bL6$vM*3%cO5&tK(hN)_yI+gH=fY{pG}lF[oR]kC;iE:aA'sS,wW.eD?uU/-~";
+
+	while (true) {
+		clear();
+
+		random_device seed;
+		mt19937 engine(seed());
+		uniform_int_distribution<int> range_shape(1, 7);
+		uniform_int_distribution<int> range_row(7, 25);
+		uniform_int_distribution<int> range_color(0, 255);
+		uniform_int_distribution<int> range_char(0, characters.size() - 1);
+
+		int shape = range_shape(engine);
+		int row = range_row(engine);
+		int index = range_char(engine);
+
+		char symbol = characters[index];
+
+		switch (shape) {
+		case 1:
+			// increasing triangle
+			for (int i = 0; i < row; i++) {
+				for (int j = 0; j <= i; j++) {
+
+					int red = range_color(engine);
+					int blue = range_color(engine);
+					int green = range_color(engine);
+
+					cout << "\033[38;2;" << red << ";" << green << ";" << blue << "m" << symbol << "\033[0m";
+					this_thread::sleep_for(chrono::microseconds(1));
+				}cout << endl;
+				this_thread::sleep_for(chrono::microseconds(1));
+			}cout << endl;
+			break;
+
+		case 2:
+			// decreasing triangle
+			for (int i = 0; i < row; i++) {
+				for (int j = 0; j < row - i; j++) {
+
+					int red = range_color(engine);
+					int blue = range_color(engine);
+					int green = range_color(engine);
+
+					cout << "\033[38;2;" << red << ";" << green << ";" << blue << "m" << symbol << "\033[0m";
+					this_thread::sleep_for(chrono::microseconds(1));
+				}cout << endl;
+				this_thread::sleep_for(chrono::microseconds(1));
+			}cout << endl;
+			break;
+
+		case 3:
+			// right-aligned decreasing triangle
+			for (int i = 0; i < row; i++) {
+				for (int j = 0; j < i; j++) {
+					cout << " ";
+				}
+
+				for (int j = 0; j < row - i; j++) {
+
+					int red = range_color(engine);
+					int blue = range_color(engine);
+					int green = range_color(engine);
+
+					cout << "\033[38;2;" << red << ";" << green << ";" << blue << "m" << symbol << "\033[0m";
+					this_thread::sleep_for(chrono::microseconds(1));
+				}cout << endl;
+				this_thread::sleep_for(chrono::microseconds(1));
+			}cout << endl;
+			break;
+
+		case 4:
+			// right-aligned increasing triangle
+			for (int i = 0; i < row; i++) {
+				for (int j = 0; j < row - i - 1; j++) {
+					cout << " ";
+				}
+
+				for (int j = 0; j <= i; j++) {
+
+					int red = range_color(engine);
+					int blue = range_color(engine);
+					int green = range_color(engine);
+
+					cout << "\033[38;2;" << red << ";" << green << ";" << blue << "m" << symbol << "\033[0m";
+					this_thread::sleep_for(chrono::microseconds(1));
+				}cout << endl;
+				this_thread::sleep_for(chrono::microseconds(1));
+			}cout << endl;
+			break;
+
+		case 5:
+			// pyramid
+			for (int i = 0; i < row; i++) {
+				for (int j = 0; j < row - i - 1; j++) {
+					cout << " ";
+				}
+
+				for (int j = 0; j < 2 * i + 1; j++) {
+
+					int red = range_color(engine);
+					int blue = range_color(engine);
+					int green = range_color(engine);
+
+					cout << "\033[38;2;" << red << ";" << green << ";" << blue << "m" << symbol << "\033[0m";
+					this_thread::sleep_for(chrono::microseconds(1));
+				}cout << endl;
+				this_thread::sleep_for(chrono::microseconds(1));
+			}cout << endl;
+			break;
+
+		case 6:
+			// inverted pyramid
+			for (int i = 0; i < row; i++) {
+				for (int j = 0; j < i; j++) {
+					cout << " ";
+				}
+
+				for (int j = 0; j < 2 * (row - i) - 1; j++) {
+
+					int red = range_color(engine);
+					int blue = range_color(engine);
+					int green = range_color(engine);
+
+					cout << "\033[38;2;" << red << ";" << green << ";" << blue << "m" << symbol << "\033[0m";
+					this_thread::sleep_for(chrono::microseconds(1));
+				}cout << endl;
+				this_thread::sleep_for(chrono::microseconds(1));
+			}cout << endl;
+			break;
+
+		case 7:
+			// full diamond
+			for (int i = 0; i < row; i++) {
+				for (int j = 0; j < row - i - 1; j++) {
+					cout << " ";
+				}
+
+				for (int j = 0; j < 2 * i + 1; j++) {
+
+					int red = range_color(engine);
+					int blue = range_color(engine);
+					int green = range_color(engine);
+
+					cout << "\033[38;2;" << red << ";" << green << ";" << blue << "m" << symbol << "\033[0m";
+					this_thread::sleep_for(chrono::microseconds(1));
+				}cout << endl;
+			}
+
+			for (int i = 0; i < row - 1; i++) {
+				for (int j = 0; j < i + 1; j++) {
+					cout << " ";
+				}
+
+				for (int j = 0; j < 2 * (row - i - 1) - 1; j++) {
+
+					int red = range_color(engine);
+					int blue = range_color(engine);
+					int green = range_color(engine);
+
+					cout << "\033[38;2;" << red << ";" << green << ";" << blue << "m" << symbol << "\033[0m";
+					this_thread::sleep_for(chrono::microseconds(1));
+				}cout << endl;
+				this_thread::sleep_for(chrono::microseconds(1));
+			}cout << endl;
+			break;
+		}
+
+		getline(cin, input);
+	}
+
+	return 0;
+}
